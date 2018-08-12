@@ -110,7 +110,6 @@ set(LIBRARIES
         mysqlpp
         mysqlclient
         device
-        epee
         checkpoints
         version
         pcsclite
