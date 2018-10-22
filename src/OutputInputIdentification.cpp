@@ -19,7 +19,7 @@ OutputInputIdentification::OutputInputIdentification(
     tx = _tx;
 
     tx_hash     = get_transaction_hash(*tx);
-    tx_pub_key     = xmreg::get_tx_pub_key_from_received_outs(*tx);
+    tx_pub_key  = xmreg::get_tx_pub_key_from_received_outs(*tx);
 
     tx_is_coinbase = is_coinbase(*tx);
 
@@ -38,11 +38,6 @@ OutputInputIdentification::OutputInputIdentification(
              << "prv_view_key" << viewkey << endl;
 
         throw OutputInputIdentificationException("Cant get derived key for a tx");
-    }
-
-    if (!tx_is_coinbase)
-    {
-
     }
 
 }
@@ -155,7 +150,7 @@ OutputInputIdentification::identify_outputs()
 
             identified_outputs.emplace_back(
                     output_info{
-                            out_key_str, amount, output_idx_in_tx,
+                            txout_k.key, amount, output_idx_in_tx,
                             rtc_outpk, rtc_mask, rtc_amount
                     });
 
@@ -168,9 +163,11 @@ OutputInputIdentification::identify_outputs()
 
 void
 OutputInputIdentification::identify_inputs(
-        const vector<pair<string, uint64_t>>& known_outputs_keys)
+        const vector<pair<public_key, uint64_t>>& known_outputs_keys)
 {
     vector<txin_to_key> input_key_imgs = xmreg::get_key_images(*tx);
+
+    size_t search_misses = {0};
 
     // make timescale maps for mixins in input
     for (const txin_to_key& in_key: input_key_imgs)
@@ -203,9 +200,9 @@ OutputInputIdentification::identify_inputs(
         for (const uint64_t& abs_offset: absolute_offsets)
         {
             // get basic information about mixn's output
-            cryptonote::output_data_t output_data = mixin_outputs.at(count);
+            cryptonote::output_data_t output_data = mixin_outputs[count];
 
-            string output_public_key_str = pod_to_hex(output_data.pubkey);
+            //string output_public_key_str = pod_to_hex(output_data.pubkey);
 
             //cout << " - output_public_key_str: " << output_public_key_str << endl;
 
@@ -217,9 +214,9 @@ OutputInputIdentification::identify_inputs(
             auto it =  std::find_if(
                     known_outputs_keys.begin(),
                     known_outputs_keys.end(),
-                    [&](const pair<string, uint64_t>& known_output)
+                    [&output_data](pair<public_key, uint64_t> const& known_output)
                     {
-                        return output_public_key_str == known_output.first;
+                        return output_data.pubkey == known_output.first;
                     });
 
             if (it == known_outputs_keys.end())
@@ -235,7 +232,7 @@ OutputInputIdentification::identify_inputs(
             identified_inputs.push_back(input_info {
                     pod_to_hex(in_key.k_image),
                     (*it).second, // amount
-                    output_public_key_str});
+                    output_data.pubkey});
 
             found_a_match = true;
 
@@ -251,7 +248,12 @@ OutputInputIdentification::identify_inputs(
             // in all inputs in a given txs. Thus, if a single input
             // is without our output, we can assume this tx does
             // not contain any of our spendings.
-            break;
+
+            // just to be sure before we break out of this loop,
+            // do it only after two misses
+
+            if (++search_misses > 2)
+                break;
         }
 
     } // for (const txin_to_key& in_key: input_key_imgs)
