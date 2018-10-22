@@ -837,7 +837,7 @@ decode_ringct(const rct::rctSig& rv,
                                               hw::get_device("default"));
                 break;
             case rct::RCTTypeFull:
-            case rct::RCTTypeBulletproof:
+            //case rct::RCTTypeBulletproof:
                 amount = rct::decodeRct(rv,
                                         rct::sk2rct(scalar1),
                                         i,
