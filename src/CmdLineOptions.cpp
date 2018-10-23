@@ -32,7 +32,7 @@ namespace xmreg
                  ->implicit_value(true),
                  "does not relay txs to other nodes. useful "
                  "when testing construction and submiting txs")
-                ("port,p", value<string>()->default_value("1984"),
+                ("port,p", value<string>()->default_value("1985"),
                  "default port for restbed service of Toklio Web Wallet")
                 ("config-file,c", value<string>()
                  ->default_value("./config/config.json"),
