@@ -19,11 +19,11 @@ endif()
 message(STATUS MONERO_DIR ": ${MONERO_DIR}")
 
 set(MONERO_SOURCE_DIR ${MONERO_DIR}
-        CACHE PATH "Path to the root directory for Monero")
+        CACHE PATH "Path to the root directory for Toklio")
 
 # set location of monero build tree
 set(MONERO_BUILD_DIR ${MONERO_SOURCE_DIR}/build/release/
-        CACHE PATH "Path to the build directory for Monero")
+        CACHE PATH "Path to the build directory for Toklio")
 
 set(MY_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake"
         CACHE PATH "The path to the cmake directory of the current project")
@@ -100,6 +100,7 @@ set(LIBRARIES
         cryptonote_basic
         daemonizer
         cncrypto
+        blocks
         lmdb
         ringct
         ringct_basic
@@ -110,6 +111,7 @@ set(LIBRARIES
         mysqlpp
         mysqlclient
         device
+        epee
         checkpoints
         version
         pcsclite
