@@ -53,7 +53,7 @@ defaultConf.setGlobally(el::ConfigurationType::ToStandardOutput, "true");
 
 el::Loggers::reconfigureLogger("openmonero", defaultConf);
 
-OMINFO << "OpenMonero is starting";
+OMINFO << "Toklio Web Wallet is starting";
 
 auto do_not_relay_opt = opts.get_option<bool>("do-not-relay");
 auto testnet_opt      = opts.get_option<bool>("testnet");

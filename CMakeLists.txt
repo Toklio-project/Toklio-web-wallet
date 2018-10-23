@@ -24,7 +24,7 @@ set(MONERO_SOURCE_DIR ${MONERO_DIR}
 
 # set location of monero build tree
 set(MONERO_BUILD_DIR ${MONERO_SOURCE_DIR}/build/release/
-        CACHE PATH "Path to the build directory for Monero")
+        CACHE PATH "Path to the build directory for Toklio")
 
 set(MY_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake"
         CACHE PATH "The path to the cmake directory of the current project")
@@ -32,7 +32,7 @@ set(MY_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake"
 list(APPEND CMAKE_MODULE_PATH "${MY_CMAKE_DIR}")
 
 set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${MONERO_BUILD_DIR}"
-        CACHE PATH "Add Monero directory for library searching")
+        CACHE PATH "Add Toklio directory for library searching")
 
 include(MyUtils)
 
@@ -99,7 +99,6 @@ set(SOURCE_FILES
 add_executable(${PROJECT_NAME}
         ${SOURCE_FILES})
 
-
 set(LIBRARIES
         myxrm
         myext
@@ -111,6 +110,7 @@ set(LIBRARIES
         cryptonote_basic
         daemonizer
         cncrypto
+        blocks
         lmdb
         ringct
         ringct_basic
@@ -121,6 +121,7 @@ set(LIBRARIES
         mysqlpp
         mysqlclient
         device
+        epee
         checkpoints
         version
         pcsclite
