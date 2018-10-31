@@ -123,8 +123,7 @@ set(LIBRARIES
         device
         epee
         checkpoints
-        version
-        pcsclite
+        version       
         sodium
         ${Boost_LIBRARIES}
         pthread
@@ -135,7 +134,7 @@ set(LIBRARIES
         crypto)
 
 if(APPLE)
-    set(LIBRARIES ${LIBRARIES} "-framework IOKit -framework PCSC")
+    set(LIBRARIES ${LIBRARIES} "-framework IOKit -framework Foundation")
 else()
     set(LIBRARIES ${LIBRARIES} atomic)
 endif()
@@ -154,6 +153,9 @@ if (WIN32)
 else()
     set(LIBRARIES ${LIBRARIES} dl)
 endif()
+
+find_package(HIDAPI)
+set(LIBRARIES ${LIBRARIES} ${HIDAPI_LIBRARIES})
 
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
 
