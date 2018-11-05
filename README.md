@@ -29,10 +29,10 @@ to MyMonero. They include:
 
 ## Live stagenet version
 
-- [http://172.104.45.209:81](http://172.104.45.209:81)
+- [http://139.162.60.17:81](http://139.162.60.17:81)
 
 This is OpenMonero running on stagnet network. You can use it to play around with it.
-Please note that the live version isis running on cheap VPS, which may result in
+Please note that the live version is running on cheap VPS, which may result in
 performance issues.
 
 ## Current development version
@@ -131,56 +131,51 @@ cmake ..
 make
 ```
 
-#### Mysql/Mariadb
+#### MariaDB/MySQL (using docker)
 
-```bash
-sudo apt install mysql-server
-sudo mysql_secure_installation
+The easiest way to setup MariaDB is through [docker](https://hub.docker.com/_/mariadb/) (assuming that you have docker setup and running)
+
+Create mariadb container called `ommariadb` and root password of `root` (change these  how you want).
+
+```
+docker run --name ommariadb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mariadb
 ```
 
-Download `openmonero.sql` provided and setup the `openmonero` database. `openmonero.sql` script will
-drop current `openmonero` if exist. So don't run it, if you have already some important information
-in the `openmonero` database.
+Create openmonero database called `openmonero`.
 
-Assuming we are still in `build` folder:
-
-```bash
-# apply it to mysql
-mysql -p -u root < ../sql/openmonero.sql
+```
+cd openmonero/sql
+docker exec -i ommariadb mysql -uroot -proot < openmonero.sql
 ```
 
-#### Lighttpd and frontend
+#### PhpMyAdmin (using docker)
+A good way to manage/view the openmonero database is through the
+[PhpMyAdmin in docker](https://hub.docker.com/r/phpmyadmin/phpmyadmin/). Using docker,
+this can be done:
 
-```bash
-sudo apt-get install lighttpd
 ```
-Assuming you are still in `build` folder, copy frontend source files into lighttpd www folder.
-
-```bash
-sudo mkdir /var/www/html/openmonero
-sudo cp -rvf ../html/* /var/www/html/openmonero/
+docker run --name myadmin -d --link ommariadb:db -p 8080:80 phpmyadmin/phpmyadmin
 ```
 
-Setup document root in `lighttpd.conf` into openmonero folder
+where `ommariadb` is the name of docker container with mariadb, set in previous step.
 
-```bash
-sudo vim /etc/lighttpd/lighttpd.conf
+With this, phpmyadmin should be avaliable at http://127.0.0.1:8080.
+
+
+#### Nginx (using docker)
+
+The fastest way to start up and server the frontend is through
+[nginx docker image](https://hub.docker.com/_/nginx/).
+
+```
+docker run --name omhtml -p 80:80 -v /home/mwo/openmonero/html:/usr/share/nginx/html:ro -d nginx
 ```
 
-and change `server.document-root` into:
-
-```bash
-server.document-root    = "/var/www/html/openmonero"
-```
-
-Restart lighttpd to see the change:
-
-```bash
-sudo systemctl restart lighttpd
-```
+where `omhtml` is docker container name, `80:80` will expose the frontend
+on port 80 of the localhost, and `/home/mwo/openmonero/html` is the location on your host computer where the
+frontend files are stored. All these can be changed to suit your requirements.
 
 Go to localhost (http://127.0.0.1) and check if frontend is working.
-
 
 #### Run OpenMonero
 

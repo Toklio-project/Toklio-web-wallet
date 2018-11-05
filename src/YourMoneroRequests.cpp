@@ -740,8 +740,8 @@ YourMoneroRequests::get_unspent_outs(
         // it is already using dynanamic fees. frontend
         // uses old fixed fees.
 
-        j_response["per_kb_fee"] = current_bc_status
-                                            ->get_dynamic_per_kb_fee_estimate();
+        j_response["per_byte_fee"] = current_bc_status
+                                            ->get_dynamic_base_fee_estimate();
 
 
     } // if (current_bc_status->search_thread_exist(xmr_address))
@@ -811,6 +811,8 @@ YourMoneroRequests::get_random_outs(
         {
             amounts.push_back(boost::lexical_cast<uint64_t>(
                                   amount.get<string>()));
+
+            //            amounts.push_back(0);
         }
     }
     catch (boost::bad_lexical_cast& e)
@@ -908,6 +910,9 @@ YourMoneroRequests::submit_raw_tx(
     {
         j_response["status"] = "error";
         j_response["error"]  = "Tx faild parse_hexstr_to_binbuff";
+
+        OMERROR << j_response["error"];
+
         session_close(session, j_response.dump());
         return;
     }
@@ -918,6 +923,9 @@ YourMoneroRequests::submit_raw_tx(
     {
         j_response["status"] = "error";
         j_response["error"]  = "Tx faild parse_and_validate_tx_from_blob";
+
+        OMERROR << j_response["error"];
+
         session_close(session, j_response.dump());
         return;
     }
@@ -929,6 +937,9 @@ YourMoneroRequests::submit_raw_tx(
                                "in the mempool. "
                                "Please wait till your previous tx(s) "
                                "get mined";
+
+        OMERROR << j_response["error"];
+
         session_close(session, j_response.dump());
         return;
     }
@@ -939,6 +950,9 @@ YourMoneroRequests::submit_raw_tx(
     {
         j_response["status"] = "error";
         j_response["error"]  = error_msg;
+
+        OMERROR << j_response["error"];
+
         session_close(session, j_response.dump());
         return;
     }
