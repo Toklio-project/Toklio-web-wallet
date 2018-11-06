@@ -2,7 +2,7 @@ var config = {
     apiUrl: "http://wallet.tokl.io:1985/",
     mainnetExplorerUrl: "http://explorer.tokl.io/",
     testnetExplorerUrl: "https://testnet.xmrchain.com/",
-    stagenetExplorerUrl: "https://stagenet.xmrchain.net/",
+    stagenetExplorerUrl: "http://139.162.60.17:8082/",
     nettype: 2, /* 0 - MAINNET, 1 - TESTNET, 2 - STAGENET */
     coinUnitPlaces: 12,
     txMinConfirms: 10,         // corresponds to CRYPTONOTE_DEFAULT_TX_SPENDABLE_AGE in Monero
