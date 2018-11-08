@@ -466,6 +466,7 @@ var cnUtil = (function(initConfig) {
         var expectedPrefixInt = this.encode_varint(CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX);
         var expectedPrefixSub = this.encode_varint(CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX);
         var prefix = dec.slice(0, expectedPrefix.length);
+        console.log(prefix+" !== "+expectedPrefix+" && "+prefix+" !== "+expectedPrefixInt+" && "+prefix+" !== "+expectedPrefixSub);
         if (prefix !== expectedPrefix && prefix !== expectedPrefixInt && prefix !== expectedPrefixSub) {
             throw "Invalid address prefix";
         }
