@@ -391,6 +391,7 @@ thinwalletCtrls.controller('SendCoinsCtrl', function($scope, $http, $q, AccountS
             try {
                 // verify that the address is valid
                 monero_utils.decode_address(target.address, config.nettype);
+                
                 sendTo(target.address, amount, null /*domain*/);
             } catch (e) {
                 fn("Failed to decode address (#" + i + "): " + e);
