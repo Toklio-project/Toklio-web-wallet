@@ -390,6 +390,8 @@ thinwalletCtrls.controller('SendCoinsCtrl', function($scope, $http, $q, AccountS
             // xmr address (incl subaddresses):
             try {
                 // verify that the address is valid
+                console.log(target.address);
+                console.log(config);
                 monero_utils.decode_address(target.address, config.nettype);
                 
                 sendTo(target.address, amount, null /*domain*/);
