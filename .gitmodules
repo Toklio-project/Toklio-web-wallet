@@ -1,4 +1,4 @@
 [submodule "src/toklegcore"]
 	path = src/toklegcore
-	url = https://github.com/moneroexamples/toklegcore
+	url = https://github.com/Toklio-project/toklegcore.git
     branch = master
