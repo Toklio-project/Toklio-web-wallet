@@ -15,7 +15,7 @@ endif()
 option(BUILD_TESTS "Build tests for the project" OFF)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/src/xmregcore/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/src/toklegcore/cmake")
 
 include(MyUtils)
 
@@ -29,7 +29,7 @@ configure_files(${CMAKE_CURRENT_SOURCE_DIR}/config
 
 # add XMREGCORE submodule
 set(BUILD_XMREGCORE_TESTS OFF CACHE INTERNAL "")
-add_subdirectory(src/xmregcore)    
+add_subdirectory(src/toklegcore)    
 
 # add src/ subfolder
 add_subdirectory(src/)
@@ -51,6 +51,6 @@ configure_files(${CMAKE_CURRENT_SOURCE_DIR}/sql
             
 if (${BUILD_TESTS})
     enable_testing()
-    add_subdirectory(src/xmregcore/ext/googletest)
+    add_subdirectory(src/toklegcore/ext/googletest)
     add_subdirectory(tests)
 endif()

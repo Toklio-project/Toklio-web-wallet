@@ -127,7 +127,7 @@ async def create_tasks(n=10, net_type='stagenet'):
 async def main():
 
     parser = argparse.ArgumentParser(
-            description='OpenMonero account imports.')
+            description='OpenToklio account imports.')
    
     parser.add_argument("-n", "--number", 
             help="number of accounts to import", type=int, 

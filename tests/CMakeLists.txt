@@ -36,9 +36,9 @@ APPEND_COVERAGE_COMPILER_FLAGS()
 
 set(COVERAGE_LCOV_EXCLUDES
     '*/ext/*' '*boost/*' '*c++/*'
-     '*/monero/*' '*googletest/*' '*googlemock/*'
+     '*/Toklio/*' '*googletest/*' '*googlemock/*'
      '*restbed/*' '*/mysql++/*' '*tests/*'
-     '*src/xmregcore/*')
+     '*src/toklegcore/*')
 
  SETUP_TARGET_FOR_COVERAGE_LCOV(
        NAME coverage

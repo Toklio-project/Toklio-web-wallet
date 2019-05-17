@@ -96,7 +96,7 @@ CurrentBlockchainStatus::update_current_blockchain_height()
     uint64_t tmp {0};
 
     // This rpc call not only gets the blockchain height
-    // but it also serves as a "ping" into the Monero
+    // but it also serves as a "ping" into the Toklio
     // deamon to keep the connection between the
     // openmonero backend and the deamon alive
     if (rpc->get_current_height(tmp))
