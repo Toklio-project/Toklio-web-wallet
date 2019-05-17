@@ -33,10 +33,16 @@ namespace xmreg
                  "does not relay txs to other nodes. useful "
                  "when testing construction and submiting txs")
                 ("port,p", value<string>()->default_value("1984"),
-                 "default port for restbed service of Open Monero")
+                 "default port for restbed service of Open Toklio")
                 ("config-file,c", value<string>()
                  ->default_value("./config/config.json"),
                  "Config file path.")
+                ("monero-log-level,m", value<size_t>()
+                 ->default_value(1),
+                 "Toklio log level 1-4, default is 1.")
+                ("verbose,v", value<size_t>()
+                 ->default_value(0),
+                 "OpenToklio log verbose level 0-4, default is 0.")
                 ("log-file,l", value<string>()
                  ->default_value("./openmonero.log"),
                  "Name and path to log file. -l \"\" to disable log file.");
