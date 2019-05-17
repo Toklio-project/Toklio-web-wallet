@@ -1,5 +1,5 @@
 var config = {
-  apiUrl: "http://wallet-api-tokl.pyrexcoin.com/",
+  apiUrl: "https://api.tokl.ovh/",
   mainnetExplorerUrl: "http://explorer.tokl.io/#/",
   testnetExplorerUrl: "https://testnet.xmrchain.com/",
   stagenetExplorerUrl: "http://139.162.60.17:8082/",
