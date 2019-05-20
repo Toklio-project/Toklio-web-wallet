@@ -190,7 +190,7 @@ thinwalletCtrls.controller('SendCoinsCtrl', function($scope, $http, $q, AccountS
         $scope.error = "";
         $scope.submitting = true;
         //
-        mymonero_core_js.monero_utils_promise.then(function(coreBridge_instance)
+        mytokl_core_js.monero_utils_promise.then(function(coreBridge_instance)
         {
             if (targets.length > 1) {
                 throw "MyMonero currently only supports one target"
@@ -323,7 +323,7 @@ thinwalletCtrls.controller('SendCoinsCtrl', function($scope, $http, $q, AccountS
                 const apiClient = new HostedMoneroAPIClient({ $http: $http })
                 var parsed_amount;
                 try {
-                    parsed_amount = mymonero_core_js.monero_amount_format_utils.parseMoney(target.amount);
+                    parsed_amount = mytokl_core_js.monero_amount_format_utils.parseMoney(target.amount);
                 } catch (e) {
                     fn("Please enter a valid amount");
                     return
@@ -366,7 +366,7 @@ thinwalletCtrls.controller('SendCoinsCtrl', function($scope, $http, $q, AccountS
                     //
                     status_update_fn: function(params)
                     {
-                        let suffix = mymonero_core_js.monero_sendingFunds_utils.SendFunds_ProcessStep_MessageSuffix[params.code]
+                        let suffix = mytokl_core_js.monero_sendingFunds_utils.SendFunds_ProcessStep_MessageSuffix[params.code]
                         _configureWith_statusUpdate(
                             statusUpdate_messageBase + " " + suffix, // TODO: localize this concatenation
                             params.code
@@ -381,7 +381,7 @@ thinwalletCtrls.controller('SendCoinsCtrl', function($scope, $http, $q, AccountS
                         const total_sent__JSBigInt = new JSBigInt(params.total_sent)
                         const tx_fee = new JSBigInt(params.used_fee)
                         const total_sent__atomicUnitString = total_sent__JSBigInt.toString()
-                        const total_sent__floatString = mymonero_core_js.monero_amount_format_utils.formatMoney(total_sent__JSBigInt) 
+                        const total_sent__floatString = mytokl_core_js.monero_amount_format_utils.formatMoney(total_sent__JSBigInt) 
                         const total_sent__float = parseFloat(total_sent__floatString)
                         //
                         const mockedTransaction = 

@@ -172,7 +172,7 @@ Go to localhost (http://127.0.0.1) and check if frontend is working.
 
 OpenMonero uses frontend code provided by mymonero.com. Among many files
 used, the two crtical ones are binary webassamply
-[MyMoneroCoreCpp_WASM.wasm](https://mymonero.com/js/lib/mymonero_core_js/monero_utils/MyMoneroCoreCpp_WASM.wasm) and
+[MyMoneroCoreCpp_WASM.wasm](https://mymonero.com/js/lib/mytokl_core_js/monero_utils/MyMoneroCoreCpp_WASM.wasm) and
 the corresponding JavaScript [mymonero-core.js](https://mymonero.com/js/lib/mymonero-core.js) files.
 They are used by [send_coins.js](https://mymonero.com/js/controllers/send_coins.js?) for providing
 transaction generation functionality.
@@ -213,7 +213,7 @@ source ~/emsdk/emsdk_env.sh
 ```
 
 The above instructions should produce `mymonero-core.js`
-and `mymonero_core_js/monero_utils/MyMoneroCoreCpp_WASM.wasm`
+and `mytokl_core_js/monero_utils/MyMoneroCoreCpp_WASM.wasm`
 (both located in `./build` folder), which can
 be used in place the files bundled with OpenMonero.
 

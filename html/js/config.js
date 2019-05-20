@@ -1,5 +1,5 @@
 var config = {
-  apiUrl: "https://api.tokl.ovh/",
+  apiUrl: "http://35.190.184.28:1985/",
   mainnetExplorerUrl: "http://explorer.tokl.io/#/",
   testnetExplorerUrl: "https://testnet.xmrchain.com/",
   stagenetExplorerUrl: "http://139.162.60.17:8082/",
